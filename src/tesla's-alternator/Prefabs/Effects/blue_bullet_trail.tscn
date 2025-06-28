@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcf0u3bjccvat"]
+
+[ext_resource type="Texture2D" uid="uid://brwrw6jiq5b3g" path="res://Assets/Art/Bullet.png" id="1_u6ntw"]
+[ext_resource type="Script" uid="uid://dlhtwmg43xm2h" path="res://Scripts/explosion_effect.gd" id="2_wa860"]
+
+[node name="BlueBulletEffect" type="Sprite2D"]
+texture = ExtResource("1_u6ntw")
+script = ExtResource("2_wa860")
+fade = true
+rotate = false
+colorHVal = 1.0
+colorVVal = 1.0
+lockTime = true
+timeLimit = 10.0

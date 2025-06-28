@@ -1,0 +1,37 @@
+[gd_scene load_steps=11 format=3 uid="uid://cu7aasvoxjaf0"]
+
+[ext_resource type="Script" uid="uid://bsddus451h3hv" path="res://Scripts/bullet.gd" id="1_o3twp"]
+[ext_resource type="Texture2D" uid="uid://brwrw6jiq5b3g" path="res://Assets/Art/Bullet.png" id="2_2e4g4"]
+[ext_resource type="PackedScene" uid="uid://gjoumhitfrjv" path="res://Prefabs/Effects/blue_bullet_explosion.tscn" id="2_6fcek"]
+[ext_resource type="Script" uid="uid://c4pv8sv4a8g8e" path="res://Scripts/effects_manager.gd" id="4_8jptx"]
+[ext_resource type="PackedScene" uid="uid://bcf0u3bjccvat" path="res://Prefabs/Effects/blue_bullet_trail.tscn" id="5_hg2ra"]
+[ext_resource type="PackedScene" uid="uid://c8xp8errhpes" path="res://Prefabs/Effects/blue_bullet_shoot.tscn" id="5_qf4cb"]
+[ext_resource type="AudioStream" uid="uid://cqvhhrupi3o7m" path="res://Assets/Music/Shoot1.wav" id="7_2og8u"]
+[ext_resource type="PackedScene" uid="uid://c1w0l6opvbyjx" path="res://Prefabs/sound_effect_player.tscn" id="7_qf4cb"]
+[ext_resource type="AudioStream" uid="uid://uodt3pgm5ylw" path="res://Assets/Music/explosion1.wav" id="8_ass7q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7dga7"]
+radius = 4.0
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_o3twp")
+Effect = ExtResource("2_6fcek")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7dga7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_2e4g4")
+
+[node name="EffectsManager" type="Node2D" parent="."]
+script = ExtResource("4_8jptx")
+shootEffect = ExtResource("5_qf4cb")
+hitEffect = ExtResource("2_6fcek")
+trailEffect = ExtResource("5_hg2ra")
+trailInterval = 3.0
+shootSound = ExtResource("7_2og8u")
+hitSound = ExtResource("8_ass7q")
+audioPlayer = ExtResource("7_qf4cb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

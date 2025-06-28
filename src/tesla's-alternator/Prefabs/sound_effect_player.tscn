@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1w0l6opvbyjx"]
+
+[ext_resource type="Script" uid="uid://cldxahqtuwdr3" path="res://Scripts/sound_effect_player.gd" id="1_afbvs"]
+
+[node name="SoundEffectPlayer" type="AudioStreamPlayer2D"]
+script = ExtResource("1_afbvs")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

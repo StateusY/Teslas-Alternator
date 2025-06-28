@@ -1,0 +1,68 @@
+[gd_scene load_steps=12 format=3 uid="uid://ddap40f8gu84"]
+
+[ext_resource type="Script" uid="uid://cyo01mhov44mt" path="res://Scripts/player.gd" id="1_5wxv7"]
+[ext_resource type="PackedScene" uid="uid://cu7aasvoxjaf0" path="res://Prefabs/Bullets/bullet.tscn" id="2_2nftw"]
+[ext_resource type="PackedScene" uid="uid://c1w0l6opvbyjx" path="res://Prefabs/sound_effect_player.tscn" id="2_knrd4"]
+[ext_resource type="Texture2D" uid="uid://cj3kq3vu7psis" path="res://Assets/Art/Tesla.png" id="2_y5hcb"]
+[ext_resource type="AudioStream" uid="uid://trdwuf4hu0l6" path="res://Assets/Music/dash.wav" id="3_hck1p"]
+[ext_resource type="Texture2D" uid="uid://ccv8hy770qxn4" path="res://Assets/Art/SpriteSheets/DashNotift.png" id="4_2nftw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2nftw"]
+radius = 3.04138
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knrd4"]
+atlas = ExtResource("4_2nftw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hck1p"]
+atlas = ExtResource("4_2nftw")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_juxdh"]
+atlas = ExtResource("4_2nftw")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4qbli"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knrd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hck1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_juxdh")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"DashNotif",
+"speed": 10.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(1.25, 1.25)
+script = ExtResource("1_5wxv7")
+soundEffectPlayer = ExtResource("2_knrd4")
+dashSoundEffect = ExtResource("3_hck1p")
+Bullet = ExtResource("2_2nftw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.5)
+shape = SubResource("CircleShape2D_2nftw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_y5hcb")
+
+[node name="FirePoint" type="Node2D" parent="."]
+position = Vector2(0, 5.6)
+
+[node name="EffectsLocalManager" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_4qbli")
+animation = &"DashNotif"
+frame = 3
+frame_progress = 1.0
