@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbgvwol830wck"]
+
+[ext_resource type="Script" uid="uid://dh40rurxf652b" path="res://Scripts/loot_item.gd" id="1_hyrrp"]
+[ext_resource type="PackedScene" uid="uid://c1w0l6opvbyjx" path="res://Prefabs/sound_effect_player.tscn" id="2_6s450"]
+[ext_resource type="Texture2D" uid="uid://brwrw6jiq5b3g" path="res://Assets/Art/Bullet.png" id="2_bljal"]
+[ext_resource type="AudioStream" uid="uid://lpxdbyqu3rme" path="res://Assets/Music/pickup.wav" id="3_2jhkf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ksw1i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_14g7p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bljal")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6s450"]
+
+[node name="LootItem" type="Area2D"]
+script = ExtResource("1_hyrrp")
+audio_player = ExtResource("2_6s450")
+pickup_sound = ExtResource("3_2jhkf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ksw1i")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_14g7p")
+
+[node name="VaccuumRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VaccuumRange"]
+shape = SubResource("CircleShape2D_6s450")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="VaccuumRange" to="." method="_on_vaccuum_range_body_entered"]

@@ -42,7 +42,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 10
 scale = Vector2(1.25, 1.25)
 script = ExtResource("1_5wxv7")
 soundEffectPlayer = ExtResource("2_knrd4")

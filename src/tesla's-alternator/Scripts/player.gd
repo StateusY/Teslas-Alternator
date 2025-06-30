@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
+# general
 @onready var effectMiniMan = get_node("EffectsLocalManager")
 @export var soundEffectPlayer : PackedScene
+var loot = 0
 
 # movement varibles
 var xDir = 0
@@ -69,8 +71,6 @@ func movement_and_rotation():
 		get_tree().current_scene.call_deferred("add_child", audio)
 		audio.stream = dashSoundEffect
 		audio.volume_db = -12
-		
-		
 	
 	# dash timer
 	if !canDash:
@@ -84,7 +84,7 @@ func movement_and_rotation():
 			effectMiniMan.play()
 	
 	# dash notif counter rotation
-	effectMiniMan.rotation = -rotation
+	effectMiniMan.global_rotation = 0
 	
 	# friction
 	if xDir != 0:
@@ -113,7 +113,7 @@ func movement_and_rotation():
 	dashMult = 1.0
 	
 	# rotate towards mouse
-	rotation = (PI / 2) + Vector2(get_viewport().get_mouse_position().x - (get_window().size.x / 2),get_viewport().get_mouse_position().y - (get_window().size.y / 2)).angle_to_point(position) 
+	rotation = (get_global_mouse_position() - global_position).angle() - PI/2
 
 func shooting():
 	# inputs
